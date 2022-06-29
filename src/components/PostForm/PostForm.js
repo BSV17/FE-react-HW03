@@ -17,8 +17,7 @@ class PostForm extends React.Component {
 
     componentDidMount() {
         if (this.props.item) {
-            this.setState({title: this.props.item.title});
-            this.setState({textContent: this.props.item.body});
+            this.setState({title: this.props.item.title, textContent: this.props.item.body});
         }
     }
 
@@ -36,7 +35,7 @@ class PostForm extends React.Component {
 
     handleChange = (event) => {
         this.setState({[event.target.name]: event.target.value});
-        if (this.validateData(event) && this.state.title !== "" && this.state.textContent !== "") {
+        if (this.validateData(event)) {
             this.setState({isValid: true});
         } else {
             this.setState({isValid: false});
@@ -46,8 +45,7 @@ class PostForm extends React.Component {
     handlePost = (event) => {
         event.preventDefault();
         this.props.handleSubmit(event, this.state.title, this.state.textContent, this.props.item?.id);
-        this.setState({title: ""});
-        this.setState({textContent: ""});
+        this.setState({title: "", textContent: ""});
     }
 
 
